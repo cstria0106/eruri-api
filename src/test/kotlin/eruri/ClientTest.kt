@@ -8,19 +8,21 @@ import org.junit.Test
 class ClientTest {
     private val client = Client()
     private val dotEnv = Dotenv.load()
-    private val username = dotEnv["USERNAME"]
-    private val password = dotEnv["PASSWORD"]
+    private val username = dotEnv["ERURI_USERNAME"]
+    private val password = dotEnv["ERURI_PASSWORD"]
 
     @Test
     fun login() {
-        client.login(username!!, password!!)
+        val response = client.login(username!!, password!!)
+        assertThat(response.isSuccessful, CoreMatchers.`is`(true))
     }
 
     @Test
     fun mainPage() {
-        client.login(username!!, password!!)
+        login()
 
         val request = client.createBuilder("/").build()
+
         val response = client.execute(request)
 
         assertThat(response.body!!.string(), CoreMatchers.containsString("My Page"))
