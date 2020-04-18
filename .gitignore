@@ -1,0 +1,13 @@
+# Build
+**/build/
+!src/**/build/
+.gradle
+gradle-app.setting
+!gradle-wrapper.jar
+.gradletasknamecache
+
+# Jetbrain IDE Setting
+.idea
+
+# Environment setting for test
+.env
